@@ -1,0 +1,93 @@
+# Sales Prediction API
+
+## Overview
+
+The Sales Prediction API is a RESTful web service built using Flask. It utilizes two machine learning models—Linear Regression and ARIMA (AutoRegressive Integrated Moving Average)—to predict sales based on historical data. The API offers predictions for sales using both models, allowing users to compare results and choose the best model for their needs.
+
+## Features
+
+- **Linear Regression Prediction**: Predicts sales based on the input features, such as inventory (`stock`) and price (`price`).
+- **ARIMA Prediction**: Provides a forecast of sales based on historical sales date.
+
+## Installation
+
+To set up and run the API, follow these steps:
+
+1. **Clone the Repository**
+
+   ```
+   git clone https://github.com/your-repo/sales-prediction-api.git
+   cd sales-prediction-api
+   ```
+
+2. **Set Up the Environment**
+
+   Create a virtual environment and activate it:
+
+   ```
+   python -m venv venv
+   source venv/bin/activate # On Windows use `venv\Scripts\activate`
+   ```
+
+3. **Install Dependencies**
+   `pip install -r requirements.txt`
+
+4. **Prepare the Dataset**
+
+   Ensure you have a sales.csv file in the root directory of the project with the following columns:
+
+   - date: Date of the sale
+   - stock: Inventory level
+   - price: Price of the product
+   - sales: Number of sales
+
+   The dataset should be in CSV format and contain historical sales data.
+
+5. Run the API
+
+   Start the Flask application:
+
+   `python main.py`
+
+   The API will be available at http://127.0.0.1:5000.
+
+## Usage
+
+To get predictions, send a POST request to the /predict endpoint with the following JSON payload:
+
+## Request
+
+```
+{
+  "stock": 100,
+  "price": 20
+}
+```
+
+## Response
+
+```
+{
+  "linear_regression_prediction": [150.0],
+  "arima_prediction": [160.0]
+}
+```
+
+- `linear_regression_prediction`: Predicted sales based on the Linear Regression model.
+- `arima_prediction`: Forecasted sales based on the ARIMA model.
+
+## Use Cases
+
+- "Sales Forecasting": Businesses can use the API to forecast future sales based on current inventory and pricing.
+- _Inventory Management_: Helps in adjusting inventory levels based on predicted sales.
+- _Price Optimization_: Assists in setting prices by understanding their impact on sales.
+
+## Error Handling
+
+If an error occurs during prediction, the API will return a JSON response with an error message:
+
+```
+{
+  "error": "Description of the error"
+}
+```
